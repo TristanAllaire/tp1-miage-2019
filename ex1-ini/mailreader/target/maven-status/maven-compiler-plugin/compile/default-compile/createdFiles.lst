@@ -1,0 +1,8 @@
+com/acme/mailreader/utils/DateIncorrecteException$ErreurDate.class
+presentation/ClientMail.class
+com/acme/mailreader/model/Mail$Statut.class
+presentation/InterpreteurLigneCommande.class
+com/acme/mailreader/model/Mail.class
+com/acme/mailreader/utils/MailComparator.class
+com/acme/mailreader/model/Mail$Builder.class
+com/acme/mailreader/utils/DateIncorrecteException.class
