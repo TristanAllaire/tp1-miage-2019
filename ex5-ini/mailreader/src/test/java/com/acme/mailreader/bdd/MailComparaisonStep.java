@@ -1,5 +1,6 @@
 package com.acme.mailreader.bdd;
 
+import java.time.Instant;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,26 +40,35 @@ public class MailComparaisonStep {
 	@Given("^un premier mail avec l'importance \"([^\"]*)\", le statut \"([^\"]*)\", le sujet \"([^\"]*)\" et la date \"([^\"]*)\"$")
 	public void un_premier_mail(boolean importance, Statut statut,
 			String sujet, String date) throws DateIncorrecteException {
-		//TODO
+		this.mail1 = new Mail.Builder(sujet).important(importance).statut(statut).date(Instant.parse(date)).build();
 	}
 
 	@Given("^un second mail avec l'importance \"([^\"]*)\", le statut \"([^\"]*)\", le sujet \"([^\"]*)\" et la date \"([^\"]*)\"$")
 	public void un_second_mail(boolean importance, Statut statut, String sujet,
 			String date) throws DateIncorrecteException {
-		//TODO
+		this.mail2 = new Mail.Builder(sujet).important(importance).statut(statut).date(Instant.parse(date)).build();
 	}
 
 	
 
 	@When("^je trie$")
 	public void je_trie() throws Throwable {
-		//TODO
+		comparator.compare(mail1, mail2);
 	}
 
 	@Then("^le tri doit retourner \"([^\"]*)\"$")
 	public void le_tri_doit_retourner(String resu) throws Throwable {
-		//TODO
-		//assertThat(...);
+		assertThat(comparator.compare(this.mail1, this.mail2), is(getMapIndexFromString(this.resuAsString,resu)));
+
+	}
+	
+	public static Object getMapIndexFromString(Map resultMap,Object result) {
+		for(Object oneResult : resultMap.keySet()) {
+			if(resultMap.get(oneResult).equals(result)) {
+				return oneResult;
+			}
+		}
+		return null;
 	}
 	
 
